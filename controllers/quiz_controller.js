@@ -21,7 +21,7 @@ exports.index=function(req, res){
       res.render('quizes/index',{quizes: quizes});
     }).error (function(error){ next (error);})
   } else {
-    models.Quiz.findAll({where:["pregunta like ?", "%"+req.query.search.replace(/\s+/g,"%")+"%"], order: 'pregunta ASC'}).then(
+    models.Quiz.findAll({where:["pregunta like ?", "%"+req.query.search.replace(/\s/g,"%")+"%"], order: 'pregunta ASC'}).then(
       function(quizes) {
         res.render('quizes/index',{quizes: quizes});
       }).error (function(error){ next (error);})
