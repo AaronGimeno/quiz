@@ -5,7 +5,7 @@ var quizController = require('../controllers/quiz_controller');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Quiz' });
+  res.render('index', { title: 'Quiz', errors: [] });
 });
 
 // Autoload
@@ -23,7 +23,7 @@ router.post('/quizes/create', quizController.create);
 
 // GET de los creditos
 router.get('/author',function(req, res, next) {
-  res.render('author');
+  res.render('author', {errors: []});
 });
 
 module.exports = router;
