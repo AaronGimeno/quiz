@@ -1,0 +1,10 @@
+En windows hay que ir a la ruta donde se ha instalado openSsl
+
+C:\OpenSSL-Win32\bin
+
+y ejecutar el openssl.exe con los siguiente comandos, para generar las claves
+(Importante la ruta del config, sino no la pilla bien).
+
+openssl genrsa -out quiz-2015-key.pem 2048
+openssl req -config C:\OpenSSL-Win32\bin\openssl.cfg -new -sha256 -key quiz-2015-key.pem -out quiz-2015-csr.pem
+openssl x509 -req -in quiz-2015-csr.pem -signkey quiz-2015-key.pem -out quiz-2015-cert.pem
