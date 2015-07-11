@@ -31,6 +31,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(partials());
 app.use(methodOverride('_method'));
 
+// Control de tiempo de sesion
+app.use(function(req, res, next) {
+   if(req.session.user){
+        if(!req.session.marcatiempo){
+            req.session.marcatiempo=(new Date()).getTime();
+        }else{
+            if((new Date()).getTime()-req.session.marcatiempo > 60000){
+                delete req.session.user;
+                req.session.marcatiempo=null;
+            }else{
+                req.session.marcatiempo=(new Date()).getTime();
+            }
+        }
+    }
+    next();
+});
+
 // Helpers dinamicos :
 app.use(function(req, res, next){
   if(!req.path.match(/\/login|\/logout/)){
